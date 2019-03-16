@@ -1,5 +1,10 @@
 <template>
-  <div v-if="visiable" @click="func" class="Hello">Hello--{{prop1}}</div>
+  <div v-if="visiable" @click="func" class="Hello">
+    Hello--{{prop1}}
+    <div>
+      <slot name="my-slot"></slot>
+    </div>
+  </div>
 </template>
 <script>
 export default {

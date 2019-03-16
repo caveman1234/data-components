@@ -73,16 +73,24 @@ export default {
     },
     func(){
       var config = {
+        $el:this.$refs.test,
+        $class:"create-hello-class",
         $props:{
           prop1:"prop111"
         },
-        $el:this.$refs.test,
         $events:{
           test:this.testEvent
         }
       };
-      this.helloIns = this.$createHello(config);
-      // Hello.$create({});
+      var renderFn = createElement => {
+        return [
+          createElement('h1', {
+              slot: 'my-slot'
+            }, 'my-slot-content')
+        ]
+      }
+      var single = true;
+      this.helloIns = this.$createHello(config,renderFn,single);
     },
     selectExtChange(value,selectedObj){
       console.log("selectExtChange",value,JSON.stringify(selectedObj))
