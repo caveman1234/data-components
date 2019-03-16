@@ -22,6 +22,10 @@ export default new Router({
     }
   ]
 })
+<<<<<<< HEAD
 var b = "develop";
 var b = "develop------2222";
 var b = "develop------2222";
+=======
+var b = "develop222";
+>>>>>>> 7947f68... 222
