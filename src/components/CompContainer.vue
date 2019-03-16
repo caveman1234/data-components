@@ -29,6 +29,12 @@
         v-model="busiData.referValue"
       ></Refer>
     </div>
+    <hr />
+    <div>
+      <el-button @click="func">点击</el-button>
+      <div ref="test"></div>
+      <div ref="hello">11</div>
+    </div>
 
   </div>
 </template>
@@ -36,12 +42,14 @@
 import SelectExt from "./commonComps/SelectExt.vue";
 import RadioExt from "./commonComps/RadioExt.vue";
 import Refer from "./commonComps/Refer.vue";
+
 var options = [
   {label:"label1",value:"value1",code:"code1",name:"name1"},
   {label:"label2",value:"value2",code:"code2",name:"name2"},
   {label:"label3",value:"value3",code:"code3",name:"name3"},
   {label:"label4",value:"value4",code:"code4",name:"name4"},
 ];
+
 export default {
   name:"CompContainer",
   components:{SelectExt,RadioExt,Refer},
@@ -55,10 +63,27 @@ export default {
         radioValue:"2",
         referValue:""
       },
-      options:options
+      options:options,
+      helloIns:null
     }
   },
   methods:{
+    testEvent(a,b,c){
+      debugger
+    },
+    func(){
+      var config = {
+        $props:{
+          prop1:"prop111"
+        },
+        $el:this.$refs.test,
+        $events:{
+          test:this.testEvent
+        }
+      };
+      this.helloIns = this.$createHello(config);
+      // Hello.$create({});
+    },
     selectExtChange(value,selectedObj){
       console.log("selectExtChange",value,JSON.stringify(selectedObj))
     }

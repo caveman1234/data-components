@@ -6,8 +6,14 @@ import router from './router'
 import Element from 'element-ui'
 // import "@/styles/test.scss"
 import "./element-variables.scss"
+import Hello from "./components/Hello.vue";
 
+import  { VueCreateAPI } from './vue-create-api.js';
+
+Vue.use(VueCreateAPI)
 Vue.use(Element)
+
+Vue.createAPI(Hello);
 
 Vue.config.productionTip = false
 
