@@ -22,5 +22,4 @@ export default new Router({
     }
   ]
 })
-var b = "develop";
-var b = "develop";
+var b = "develop222";
