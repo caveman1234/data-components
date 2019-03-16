@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import MainPage from '@/components/MainPage'
 import CompContainer from '@/components/CompContainer'
 var a = "develop1";
-var a = "develop1";
+var a = "develop1111";
 Vue.use(Router)
 
 export default new Router({
@@ -22,4 +22,6 @@ export default new Router({
     }
   ]
 })
-var b = "develop222";
+var b = "develop";
+var b = "develop------2222";
+var b = "develop------2222";
