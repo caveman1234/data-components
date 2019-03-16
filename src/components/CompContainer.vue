@@ -73,7 +73,7 @@ export default {
     },
     func(){
       var config = {
-        $el:this.$refs.test,
+        $el:this.$refs.test,//挂载到el元素上,默认append到body
         $class:"create-hello-class",
         $props:{
           prop1:"prop111"
