@@ -33,6 +33,7 @@
     <div>
       <el-button @click="func">点击</el-button>
       <el-button @click="promiseClick">promise点击</el-button>
+      <el-button @click="promiseDialogClick">promise--dialog--点击</el-button>
       <div ref="test"></div>
       <div ref="hello">11</div>
     </div>
@@ -105,7 +106,7 @@ export default {
       var _this = this;
       return new Promise((resolve,reject) => {
         var config = {
-          // $el:this.$refs.test,//挂载到el元素上,默认append到body
+          $el:this.$refs.test,//挂载到el元素上,默认append到body
           $class:"create-hello-class",
           $props:{
             prop1:"prop111"
@@ -116,6 +117,7 @@ export default {
             },
             hide(msg){
               console.log(_this)
+              _this.helloIns.remove();
               resolve("hide--" + msg);
             }
           }
@@ -133,7 +135,66 @@ export default {
     },
     selectExtChange(value,selectedObj){
       console.log("selectExtChange",value,JSON.stringify(selectedObj))
-    }
+    },
+
+    dialog1(){
+      var _this = this;
+      return new Promise((resolve,reject) => {
+        var ins = null;
+        var config = {
+          // $el:this.$refs.test,//挂载到el元素上,默认append到body
+          $class:"create-hello-class",
+          $props:{
+            prop1:"prop111"
+          },
+          $events:{
+            cancle:(msg) => {
+              resolve({type:"cancle",ins});
+            },
+            confirm(msg){
+              resolve({type:"confirm",ins});
+            }
+          }
+        };
+        ins = this.$createDialog1(config,true).show();
+      });
+    },
+    dialog2(){
+      var _this = this;
+      return new Promise((resolve,reject) => {
+        var ins = null;
+        var config = {
+          // $el:this.$refs.test,//挂载到el元素上,默认append到body
+          $class:"create-hello-class",
+          $props:{
+            prop1:"prop111"
+          },
+          $events:{
+            cancle:(msg) => {
+              resolve({type:"cancle",ins});
+            },
+            confirm(msg){
+              resolve({type:"confirm",ins});
+            }
+          }
+        };
+        ins = this.$createDialog2(config,true).show();
+      });
+    },
+
+    async promiseDialogClick(){
+      var res1 = await this.dialog1();
+      if(res1.type === "confirm"){
+        var res2 = await this.dialog2();
+        if(res2.type === "confirm"){
+          alert("success");
+        }else{
+          alert("dialog2--取消");
+        }
+      }else{
+        alert("dialog1-取消");
+      }
+    },
   },
   watch:{},
   mounted(){

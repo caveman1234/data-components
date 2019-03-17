@@ -1,6 +1,6 @@
 <template>
   <div v-if="visiable" class="Hello">
-    Hello--{{prop1}}
+    Hello--{{prop1}}--{{msg}}
     <div @click="hide">hide</div>
     <div>
       <slot name="my-slot"></slot>
@@ -26,6 +26,12 @@ export default {
     hide(){
       this.visiable = false;
       this.$emit("hide","hello-hide");
+      this.resetData();
+      // this.remove();
+    },
+    resetData(){
+      this.msg = "hello";
+      this.visiable = true;
     }
   },
   watch: {
