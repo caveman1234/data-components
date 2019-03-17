@@ -1,6 +1,7 @@
 <template>
-  <div v-if="visiable" @click="func" class="Hello">
+  <div v-if="visiable" class="Hello">
     Hello--{{prop1}}
+    <div @click="hide">hide</div>
     <div>
       <slot name="my-slot"></slot>
     </div>
@@ -18,14 +19,13 @@ export default {
     }
   },
   methods: {
-    func(){
-      this.$emit("test",1,2,3,4);
-    },
     show(){
       this.visiable = true;
+      // this.$emit("show","hello-show");//只能resolve一次
     },
     hide(){
       this.visiable = false;
+      this.$emit("hide","hello-hide");
     }
   },
   watch: {
@@ -35,7 +35,7 @@ export default {
 
   },
   mounted() {
-
+    // this.$emit("show","hello-show");
   },
 }
 </script>

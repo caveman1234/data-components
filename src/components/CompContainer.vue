@@ -32,6 +32,7 @@
     <hr />
     <div>
       <el-button @click="func">点击</el-button>
+      <el-button @click="promiseClick">promise点击</el-button>
       <div ref="test"></div>
       <div ref="hello">11</div>
     </div>
@@ -91,6 +92,44 @@ export default {
       }
       var single = true;
       this.helloIns = this.$createHello(config,renderFn,single);
+    },
+
+    async promiseClick(){
+      var result = await this.promiseFun();
+      console.log("Object")
+      return;
+      console.log(result)
+    },
+
+    promiseFun(){
+      var _this = this;
+      return new Promise((resolve,reject) => {
+        var config = {
+          // $el:this.$refs.test,//挂载到el元素上,默认append到body
+          $class:"create-hello-class",
+          $props:{
+            prop1:"prop111"
+          },
+          $events:{
+            show:(msg) => {
+              resolve("show--" + msg);
+            },
+            hide(msg){
+              console.log(_this)
+              resolve("hide--" + msg);
+            }
+          }
+        };
+        var renderFn = createElement => {
+          return [
+            createElement('h1', {
+                slot: 'my-slot'
+              }, 'my-slot-content')
+          ]
+        }
+        var single = true;
+        this.helloIns = this.$createHello(config,renderFn,single);
+        });
     },
     selectExtChange(value,selectedObj){
       console.log("selectExtChange",value,JSON.stringify(selectedObj))
