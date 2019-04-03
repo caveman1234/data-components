@@ -8,6 +8,8 @@
 # install dependencies1
 npm install
 
+# serve with hot reload at localhost:8080
+npm run dev
 # serve with hot reload at localhost:808066
 npm run dev
 
